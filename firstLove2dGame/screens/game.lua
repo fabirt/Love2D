@@ -1,6 +1,6 @@
 -- Tools
 require("tools/collisions")
-
+require ("tools/animatedTiledmap")
 -- Entities
 Player = require("entities/player")
 Bullet = require("entities/bullet")
@@ -40,14 +40,13 @@ function GameScreen:new()
         renderer:addRenderer(self)
         gameLoop:addLoop(self)
 
+        tilemap = loadTiledMap2("assets/maps/tilemap", "assets/maps/")  
+
         gunSound = love.audio.newSource("assets/sounds/gun-sound.wav", "static")
-        musicTrack = love.audio.newSource("assets/sounds/track1.mp3", "static")
         enemyImg = love.graphics.newImage("assets/enemy.png")
     
         player = Player:new(200, 610)
     
-        musicTrack:setLooping(true)
-        musicTrack:play()
     end
     
     function gameScreen:tick(dt)
@@ -154,6 +153,7 @@ function GameScreen:new()
     end
     
     function gameScreen:draw(dt)
+        tilemap:draw(dt)
         love.graphics.print("SCORE: " .. tostring(score), 400, 10)
         if not isAlive then
             love.graphics.print("Press 'R' to restart", width / 2 - 50, height / 2 - 10)
