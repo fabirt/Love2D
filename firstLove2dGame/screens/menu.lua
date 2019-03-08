@@ -13,8 +13,8 @@ function MenuScreen:new()
         renderer:addRenderer(self)
         gameLoop:addLoop(self)
 
-        _G.map = loadTiledMap("assets/maps/menuMap", "assets/maps/")  
-
+        menuMap = loadTiledMap("assets/maps/menuMap", "assets/maps/")  
+        menuMap:load()
     
     end
     
@@ -25,7 +25,7 @@ function MenuScreen:new()
 
     
     function menuScreen:draw(dt)
-       _G.map:draw()
+       menuMap:draw()
        love.graphics.print( "Space Monkeys", 150, 540, 0, 2, 2)
        love.graphics.print( "Press something to start!", 170, 600, 0, 1, 1 )
     end

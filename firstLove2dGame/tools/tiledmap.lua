@@ -10,6 +10,8 @@ function loadTiledMap(pathToTilemap, pathToTileset)
 
     map.image = love.graphics.newImage(pathToTileset..tileset.image)
 
+    map.tiles = {}
+
     for y = 0, (tileset.imageheight / tileset.tileheight ) - 1 do
         for x = 0, (tileset.imagewidth / tileset.tilewidth) - 1 do
             local quad = love.graphics.newQuad(
@@ -24,7 +26,7 @@ function loadTiledMap(pathToTilemap, pathToTileset)
         end
     end
 
-    function map:draw(dt)
+    function map:load()
         for i, layer in ipairs(self.layers) do
             for y = 0, layer.height - 1 do
                 for x = 0, layer.width - 1 do
@@ -36,16 +38,26 @@ function loadTiledMap(pathToTilemap, pathToTileset)
                             local xx = x * tileset.tilewidth
                             local yy = (y * tileset.tileheight)
                             
-                            love.graphics.draw(
-                                self.image,
-                                quad,
-                                xx,
-                                yy
-                            )
+                            local tile = {
+                                posX = xx,
+                                posY = yy,
+                                selfQuad = quad
+                            }
+                            table.insert( self.tiles, tile )
                         end
                     end
                 end
             end
+        end
+    end
+
+    function map:tick(dt)
+
+    end
+
+    function map:draw(dt)
+        for i, tile in ipairs(self.tiles) do
+            love.graphics.draw(self.image, tile.selfQuad, tile.posX, tile.posY)
         end
     end
 

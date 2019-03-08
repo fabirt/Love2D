@@ -41,6 +41,7 @@ function GameScreen:new()
         gameLoop:addLoop(self)
 
         tilemap = loadTiledMap2("assets/maps/tilemap", "assets/maps/")  
+        tilemap:load()
 
         gunSound = love.audio.newSource("assets/sounds/gun-sound.wav", "static")
         enemyImg = love.graphics.newImage("assets/enemy.png")
@@ -50,6 +51,9 @@ function GameScreen:new()
     end
     
     function gameScreen:tick(dt)
+        
+        tilemap:tick(dt)
+
         -- I always start with an easy way to exit the game
         if love.keyboard.isDown("escape") then
             love.event.push("quit")
@@ -81,7 +85,7 @@ function GameScreen:new()
             createEnemyTimer = createEnemyTimerMax
             -- Create an enemy
             randomNumber = math.random(10, love.graphics.getWidth() - enemyImg:getWidth())
-            enemy = Enemy:new(randomNumber, -10)
+            enemy = Enemy:new(randomNumber, -enemyImg:getHeight())
             table.insert(enemies, enemy)
         end
         if #enemies > 0 then

@@ -8,6 +8,7 @@ MenuScreen = require("screens/menu")
 debug = true
 
 gameTime = 0
+deltaTime = 0
 
 start = false
 done = false
@@ -26,6 +27,7 @@ function love.load(arg)
 end
 
 function love.update(dt)
+    deltaTime = dt
     gameTime = gameTime + dt
     gameLoop:update(dt)
 end
