@@ -1,5 +1,6 @@
 local Class = require "libs.hump.class"
 local Entity = require "entities.Entity"
+require "libs.paddy.paddy"
 
 local player =
     Class {
@@ -64,7 +65,7 @@ end
 
 function player:update(dt)
     local prevX, prevY = self.x, self.y
-    
+    paddy.update(dt)
     -- Apply Friction
     self.xVelocity = self.xVelocity * (1 - math.min(dt * self.friction, 1))
     self.yVelocity = self.yVelocity * (1 - math.min(dt * self.friction, 1))
@@ -76,11 +77,11 @@ function player:update(dt)
 
     
 
-    if love.keyboard.isDown("left", "a") and self.xVelocity > -self.maxSpeed then
+    if (love.keyboard.isDown("left", "a") or paddy.isDown("left") ) and self.xVelocity > -self.maxSpeed then
         self.xVelocity = self.xVelocity - self.acc * dt
         self.dir = "l"
         self:anim(3, dt)
-    elseif love.keyboard.isDown("right", "d") and self.xVelocity < self.maxSpeed then
+    elseif (love.keyboard.isDown("right", "d") or paddy.isDown("right") ) and self.xVelocity < self.maxSpeed then
         self.xVelocity = self.xVelocity + self.acc * dt
         self.dir = "r"
         self:anim(2, dt)
@@ -91,12 +92,12 @@ function player:update(dt)
  
     end
 
-    if love.keyboard.isDown("down") then
+    if love.keyboard.isDown("down") or paddy.isDown("down") then
         self:anim(6, dt)
     end
 
     -- The Jump code gets a lttle bit crazy.  Bare with me.
-    if love.keyboard.isDown("up", "w") then
+    if love.keyboard.isDown("up", "w") or paddy.isDown("a") then
         if -self.yVelocity < self.jumpMaxSpeed and not self.hasReachedMax  then
             self.yVelocity = self.yVelocity - self.jumpAcc * dt
         elseif math.abs(self.yVelocity) > self.jumpMaxSpeed then

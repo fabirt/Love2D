@@ -1,6 +1,7 @@
 -- Import our libraries.
 local Gamestate = require "libs.hump.gamestate"
 local Class = require "libs.hump.class"
+require "libs.paddy.paddy"
 
 -- Grab our base class
 local LevelBase = require "gamestates.LevelBase"
@@ -40,12 +41,13 @@ end
 function gameLevel1:draw()
     -- Attach the camera before drawing the entities
     camera:set()
-
+    
     self.map:draw(-camera.x, -camera.y) -- Remember that we inherited map from LevelBase
     LevelBase.Entities:draw() -- this executes the draw function for each individual Entity
-
+        
     camera:unset()
     -- Be sure to detach after running to avoid weirdness
+    paddy.draw()
 end
 
 function gameLevel1:restart()
