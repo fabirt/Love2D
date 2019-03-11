@@ -70,6 +70,7 @@ function instructions:fadeBgOut(dt)
     self.mainOpacity = self.mainOpacity + (fadeVel*dt)
     if timer <= 0 then
         timer = 1 * fadeTime
+        Gamestate.switch(gameLevel1)
     end
 end
 

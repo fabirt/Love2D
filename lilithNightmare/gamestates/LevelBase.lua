@@ -2,7 +2,7 @@
 -- This class is Gamestate but with function for loading up Tiled maps.
 
     local bump = require "libs.bump.bump"
-    local Gamestate = require "libs.hump.gamestate"
+    -- local Gamestate = require "libs.hump.gamestate"
     local Class = require "libs.hump.class"
     local sti = require "libs.sti.sti" -- New addition here
     local Entities = require "entities.Entities"
@@ -13,7 +13,7 @@
         __includes = Gamestate,
         init = function(self, mapFile)
             self.map = sti(mapFile, {"bump"})
-            self.world = bump.newWorld(32)
+            self.world = bump.newWorld(16)
             self.map:resize(love.graphics.getWidth(), love.graphics.getHeight())
     
             self.map:bump_init(self.world)

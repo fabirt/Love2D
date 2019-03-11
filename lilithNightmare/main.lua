@@ -4,6 +4,7 @@ Gamestate = require "libs.hump.gamestate"
 -- Pull in each of our game states
 mainMenu = require "gamestates.mainMenu"
 instructions = require "gamestates.instructions"
+gameLevel1 = require "gamestates.gameLevel1"
 
 G_WIDTH = nil
 G_HEIGHT = nil
