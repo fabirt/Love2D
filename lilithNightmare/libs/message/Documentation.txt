@@ -1,0 +1,39 @@
+Parameters:
+  Bottle:
+    id    text
+  Stay:
+    id    text
+  Timed:
+    id    text    time
+  Bool:
+    id    text    TrueText   FalseText
+  Choice:
+    id    text    nChoices
+Setter:
+  Bottle:
+    x   y   position    width   height
+    button
+    ease    fade    fadeTime    easeTime
+    enter   exit
+    sound   volume
+    Indicator
+    fgColor   fgAlpha   font
+    bgColor   bgAlpha   bgRadius    bgRadiusSegments
+  Timed:
+    time
+Return:
+  Bottle:
+    nothing
+  Stay:
+    0
+  Timed:
+    1 : Timed out
+    0 : Closed with button
+  Bool:
+    0 : User chose first option
+    1 : User chose second option
+  Choice:
+    0 : User chose first option
+    1 : User chose second option
+    ...
+    n : User chose nth option
