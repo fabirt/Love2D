@@ -7,7 +7,7 @@ require "libs.paddy.paddy"
 local LevelBase = require "gamestates.LevelBase"
 
 -- Import the Entities we will build.
--- local Player = require "entities.player"
+local Player = require "entities.player"
 local camera = require "libs.camera"
 
 -- Declare a couple immportant variables
@@ -26,8 +26,8 @@ function gameLevel1:init()
 end
 
 function gameLevel1:enter()
-    -- player = Player(self.world, 64, 64)
-    -- LevelBase.Entities:add(player)
+    player = Player(self.world, 64, 64)
+    LevelBase.Entities:add(player)
 end
 
 function gameLevel1:update(dt)
@@ -35,7 +35,7 @@ function gameLevel1:update(dt)
     LevelBase.Entities:update(dt) -- this executes the update function for each individual Entity
     self:restart()
 
-    -- LevelBase.positionCamera(self, player, camera)
+    LevelBase.positionCamera(self, player, camera)
 end
 
 function gameLevel1:draw()

@@ -34,6 +34,7 @@
     function LevelBase:positionCamera(player, camera)
         local mapWidth = self.map.width * self.map.tilewidth -- get width in pixels
         local halfScreen = love.graphics.getWidth() / 2
+        local halfHeight = love.graphics.getHeight() / 2
     
         if player.x < (mapWidth - halfScreen) then -- use this value until we're approaching the end.
             boundX = math.max(0, player.x - halfScreen) -- lock camera at the left side of the screen.
@@ -41,7 +42,8 @@
             boundX = math.min(player.x - halfScreen, mapWidth - love.graphics.getWidth()) -- lock camera at the right side of the screen
         end
     
-        camera:setPosition(boundX, 0)
+        -- camera:setPosition(boundX, 0)
+        camera:setPosition(player.x - halfScreen, player.y - halfHeight)
     end
     
     return LevelBase

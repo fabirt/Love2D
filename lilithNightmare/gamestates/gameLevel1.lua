@@ -1,13 +1,13 @@
 -- Import our libraries.
 -- local Gamestate = require "libs.hump.gamestate"
 local Class = require "libs.hump.class"
--- require "libs.paddy.paddy"
+require "libs.paddy.paddy"
 
 -- Grab our base class
 local LevelBase = require "gamestates.LevelBase"
 
 -- Import the Entities we will build.
-
+local Player = require "entities.player"
 local camera = require "libs.camera"
 
 -- Declare a couple immportant variables
@@ -26,17 +26,18 @@ function gameLevel1:init()
 end
 
 function gameLevel1:enter()
-    -- player = Player(self.world, 64, 64)
-    -- LevelBase.Entities:add(player)
+    player = Player(self.world, 16*9, 16*37)
+    LevelBase.Entities:add(player)
+    paddy.load()
 
 end
 
 function gameLevel1:update(dt)
     self.map:update(dt) -- remember, we inherited map from LevelBase
-    -- LevelBase.Entities:update(dt) -- this executes the update function for each individual Entity
+    LevelBase.Entities:update(dt) -- this executes the update function for each individual Entity
     -- self:restart()
-    camera:setPosition(0, 0)
-    -- LevelBase.positionCamera(self, player, camera)
+    -- camera:setPosition(0, 0)
+    LevelBase.positionCamera(self, player, camera)
     
 end
 
@@ -46,18 +47,12 @@ function gameLevel1:draw()
     camera:set()
     
     self.map:draw(-camera.x, -camera.y) -- Remember that we inherited map from LevelBase
-    -- LevelBase.Entities:draw() -- this executes the draw function for each individual Entity
+    LevelBase.Entities:draw() -- this executes the draw function for each individual Entity
         
     camera:unset()
     -- Be sure to detach after running to avoid weirdness
-    -- paddy.draw()
+    paddy.draw()
 
-end
-
-function gameLevel1:restart()
-    --[[ if player.y > love.graphics.getHeight() then
-        player:reset(32, 64)
-    end ]]
 end
 
 -- All levels will have a pause menu
